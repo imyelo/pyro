@@ -8,5 +8,10 @@
     "url": "git@gitlab.sodalife.xyz:soda/pyro.git"
   },
   "author": "yelo",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "inquirer": "^5.2.0",
+    "serialport": "^6.1.1"
+  }
 }
