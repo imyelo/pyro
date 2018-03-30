@@ -1,0 +1,20 @@
+@import './assets/Orbitron/transfonter/stylesheet.css';
+@import './assets/iconfont/iconfont.css';
+
+html, body {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: Orbitron, '微软雅黑', Roboto, -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", sans-serif;
+}
+
+body {
+  -webkit-app-region: drag;
+  -webkit-user-select: none;
+}
+
+button {
+  -webkit-app-region: no-drag;
+}
