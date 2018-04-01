@@ -8,10 +8,13 @@ const electronStore = new ElectronStore({ name: 'pyro' })
 
 const MUTATION = km({
   LOG_ADD: null,
+  CLEAR_LOGS: null,
   COM_SET: null,
   DEVICES_SET: null,
   AUTO_BURN_SET: null,
 })
+
+const DEFAULT_LOG = { type: 'verbose', message: 'Hello World!' }
 
 Vue.use(Vuex)
 
@@ -26,12 +29,15 @@ export default new Store({
   state: {
     devices: [],
     com: '',
-    logs: [{ type: 'verbose', message: 'Ready' }],
+    logs: [DEFAULT_LOG],
     isAutoBurn: false,
   },
   mutations: {
     [MUTATION.LOG_ADD] (state, log) {
       state.logs.push(log)
+    },
+    [MUTATION.CLEAR_LOGS] (state, log) {
+      state.logs = [DEFAULT_LOG]
     },
     [MUTATION.COM_SET] (state, com) {
       state.com = com
@@ -46,6 +52,9 @@ export default new Store({
   actions: {
     log ({ commit }, data) {
       commit(MUTATION.LOG_ADD, data)
+    },
+    clearLogs ({ commit }) {
+      commit(MUTATION.CLEAR_LOGS)
     },
     setCom ({ commit }, com) {
       commit(MUTATION.COM_SET, com)

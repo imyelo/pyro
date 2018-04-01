@@ -2,10 +2,13 @@
   <div class="main">
     <Navigator />
     <div class="view">
-      <div class="console" ref="console">
-        <transition-group name="transition-log" v-on:enter="scrollToConsoleBottom">
-          <pre v-for="(log, index) in logs" :key="index" v-bind:class="log.type">> {{ log.message }}</pre>
-        </transition-group>
+      <div class="console">
+        <div class="logs" ref="logs">
+          <transition-group name="transition-log" v-on:enter="scrollToLastLog">
+            <pre v-for="(log, index) in logs" :key="index" v-bind:class="log.type">> {{ log.message }}</pre>
+          </transition-group>
+        </div>
+        <button class="clear" v-on:click="clearLogs">Clear</button>
       </div>
       <div class="control">
         <input class="input" placeholder="Type the serial of device here." v-model.trim="serial" v-on:change="device = null" v-on:keyup.enter="search" autofocus />
@@ -51,11 +54,11 @@ export default {
     'isAutoBurn',
   ]),
   mounted () {
-    this.scrollToConsoleBottom()
+    this.scrollToLastLog()
   },
   methods: {
-    scrollToConsoleBottom () {
-      this.$refs.console.scrollTop = this.$refs.console.scrollHeight
+    scrollToLastLog () {
+      this.$refs.logs.scrollTop = this.$refs.logs.scrollHeight
     },
     toImport () {
       this.$router.push('/import?backable')
@@ -65,6 +68,9 @@ export default {
     },
     toggleAutoBurn () {
       this.$store.dispatch('setAutoBurn', !this.isAutoBurn)
+    },
+    clearLogs () {
+      this.$store.dispatch('clearLogs')
     },
     search () {
       if (!this.serial) {
@@ -132,19 +138,24 @@ export default {
     padding: 12px;
     font-size: 12px;
     box-sizing: border-box;
-    overflow-x: hidden;
-    overflow-y: scroll;
-    -webkit-app-region: no-drag;
+    position: relative;
 
-    &::-webkit-scrollbar-track {
-      background-color: transparent;
-    }
-    &::-webkit-scrollbar {
-      width: 2px;
-      background-color: transparent;
-    }
-    &::-webkit-scrollbar-thumb {
-      background-color: #ccc;
+    .logs {
+      height: 100%;
+      width: 100%;
+      overflow-x: hidden;
+      overflow-y: scroll;
+      -webkit-app-region: no-drag;
+      &::-webkit-scrollbar-track {
+        background-color: transparent;
+      }
+      &::-webkit-scrollbar {
+        width: 2px;
+        background-color: transparent;
+      }
+      &::-webkit-scrollbar-thumb {
+        background-color: #ccc;
+      }
     }
 
     pre {
@@ -166,6 +177,24 @@ export default {
       }
       &.success {
         color: hsl(100, 100%, 80%);
+      }
+    }
+
+    .clear {
+      position: absolute;
+      top: 12px;
+      right: 24px;
+      font-size: 8px;
+      padding: 2px 4px;
+      background-color: #333333;
+      border: 1px solid #fff;
+      outline: none;
+      color: #fff;
+      cursor: pointer;
+      transition: all 200ms ease;
+      &:hover {
+        background-color: #fff;
+        color: #333;
       }
     }
   }
