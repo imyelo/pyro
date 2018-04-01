@@ -72,9 +72,6 @@ export default {
   align-items: center;
   flex-direction: column;
   cursor: pointer;
-  &.dragging {
-    background-color: hsla(26, 100%, 69%, 1);
-  }
   p {
     margin: 12px 0;
     padding: 0;
@@ -85,23 +82,10 @@ export default {
       width: 120px;
     }
   }
-  .button {
-    display: block;
-    margin: 0 auto;
-    padding: 24px 48px;
-    border: none;
-    background-color: #333;
-    color: #fff;
-    border-radius: 0;
-    font-size: 18px;
-    text-transform: uppercase;
-    transition: all 400ms ease;
-    cursor: pointer;
-    outline: none;
-    box-shadow: none;
-    &:hover {
-      box-shadow: 0 4px 0 #fff;
-      background: #ab3f00;
+  &.dragging {
+    background-color: rgba(255,255,255,0.5);
+    p {
+      opacity: 0.5;
     }
   }
 }
