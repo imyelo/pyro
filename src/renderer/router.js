@@ -8,6 +8,6 @@ export default new VueRouter({
     { path: '/import', component: () => import('./views/import.vue') },
     { path: '/ports', component: () => import('./views/ports.vue') },
     { path: '/furnace', component: () => import('./views/furnace.vue') },
-    { path: '/', redirect: '/import' },
+    { path: '/', component: () => import('./views/launch.vue') },
   ],
 })

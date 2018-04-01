@@ -1,8 +1,10 @@
 import Vuex, { Store } from 'vuex'
+import createPersistedState from 'vuex-persistedstate'
 import Vue from 'vue'
 import km from 'keymirror'
+import ElectronStore from 'electron-store'
 
-Vue.use(Vuex)
+const electronStore = new ElectronStore({ name: 'pyro' })
 
 const MUTATION = km({
   LOG_ADD: null,
@@ -11,7 +13,16 @@ const MUTATION = km({
   AUTO_BURN_SET: null,
 })
 
+Vue.use(Vuex)
+
 export default new Store({
+  plugins: [createPersistedState({
+    storage: {
+      getItem: (key) => electronStore.get(key),
+      setItem: (key, value) => electronStore.set(key, value),
+      removeItem: (key) => electronStore.delete(key),
+    },
+  })],
   state: {
     devices: [],
     com: '',
