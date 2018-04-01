@@ -2,8 +2,10 @@
   <div class="main">
     <Navigator />
     <div class="view">
-      <div class="console" npm v-chat-scroll>
-        <pre v-for="log in logs" :key="log.index" v-bind:class="log.type">> {{ log.message }}</pre>
+      <div class="console" ref="console">
+        <transition-group name="transition-log" v-on:enter="scrollToConsoleBottom">
+          <pre v-for="(log, index) in logs" :key="index" v-bind:class="log.type">> {{ log.message }}</pre>
+        </transition-group>
       </div>
       <div class="control">
         <input class="input" placeholder="Type the serial of device here." v-model.trim="serial" v-on:change="device = null" v-on:keyup.enter="search" autofocus />
@@ -48,7 +50,13 @@ export default {
     'logs',
     'isAutoBurn',
   ]),
+  mounted () {
+    this.scrollToConsoleBottom()
+  },
   methods: {
+    scrollToConsoleBottom () {
+      this.$refs.console.scrollTop = this.$refs.console.scrollHeight
+    },
     toImport () {
       this.$router.push('/import?backable')
     },
@@ -241,6 +249,15 @@ export default {
         color: #fff;
       }
     }
+  }
+
+  .transition-log-enter-active {
+    transition: all ease .2s;
+    transform: translateX(0);
+  }
+  .transition-log-enter {
+    opacity: 0;
+    transform: translateX(12px);
   }
 }
 </style>

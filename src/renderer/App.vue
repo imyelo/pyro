@@ -1,6 +1,6 @@
 <template>
   <div class="app">
-    <transition name="fade" mode="out-in">
+    <transition name="transition-view" mode="out-in">
       <router-view />
     </transition>
   </div>
@@ -36,17 +36,17 @@ export default {
   }
 }
 
-.fade-enter-active, .fade-leave-active {
+.transition-view-enter-active, .transition-view-leave-active {
   transition: all ease .4s;
   transform: translateX(0);
 }
-.fade-enter, .fade-leave-to {
+.transition-view-enter, .transition-view-leave-to {
   opacity: 0;
 }
-.fade-enter {
+.transition-view-enter {
   transform: translateX(24px) scale(0.95);
 }
-.fade-leave-to {
+.transition-view-leave-to {
   transform: translateX(-24px) scale(1.05);
 }
 </style>
