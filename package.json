@@ -1,7 +1,8 @@
 {
   "name": "pyro",
   "version": "0.1.3",
-  "description": "Pyro meets Soda",
+  "description": "Firmware data burner for Sodalife device.",
+  "private": true,
   "main": "src",
   "scripts": {
     "postinstall": "electron-builder install-app-deps",
