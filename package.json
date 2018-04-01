@@ -1,14 +1,14 @@
 {
   "name": "pyro",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Pyro meets Soda",
   "main": "src",
   "scripts": {
     "postinstall": "electron-builder install-app-deps",
     "dev": "electron-webpack dev",
     "compile": "electron-webpack",
-    "dist": "yarn compile && electron-builder",
-    "dist:dir": "yarn dist --dir -c.compression=store -c.mac.identity=null"
+    "dist": "npm run compile && electron-builder",
+    "dist:dir": "npm run dist --dir -c.compression=store -c.mac.identity=null"
   },
   "repository": {
     "type": "git",
@@ -43,8 +43,9 @@
   },
   "build": {
     "appId": "xyz.sodalife.pyro",
-    "mac": {
-      "category": "xyz.sodalife.hardware"
+    "win": {
+      "target": "portable",
+      "icon": "build/icon.png"
     },
     "directories": {
       "buildResources": "build"
