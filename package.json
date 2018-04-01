@@ -8,7 +8,8 @@
     "dev": "electron-webpack dev",
     "compile": "electron-webpack",
     "dist": "npm run compile && electron-builder",
-    "dist:dir": "npm run dist --dir -c.compression=store -c.mac.identity=null"
+    "dist:dir": "npm run dist --dir -c.compression=store -c.mac.identity=null",
+    "dist:retry:win": "npm run compile && electron-builder --prepackaged ./dist/win-unpacked"
   },
   "repository": {
     "type": "git",
