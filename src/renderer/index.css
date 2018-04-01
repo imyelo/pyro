@@ -10,6 +10,10 @@ html, body {
   font-family: Orbitron, '微软雅黑', Roboto, -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", sans-serif;
 }
 
+input, button, pre {
+  font-family: Orbitron, '微软雅黑', Roboto, -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", sans-serif;
+}
+
 body {
   -webkit-app-region: drag;
   -webkit-user-select: none;

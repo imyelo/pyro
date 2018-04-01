@@ -14,7 +14,7 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style lang="less" scope>
 .console {
   width: 400px;
   height: 800px;

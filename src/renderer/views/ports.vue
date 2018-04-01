@@ -1,37 +1,27 @@
 <template>
-  <div class="view">
-    <h2><span class="iconfont icon-left-circle back" v-on:click="back"></span> Select the output serial port:</h2>
-    <div class="ports">
-      <div v-for="port in ports" :key="port.comName" class="port">
-        <h3>{{ port.comName || '-'  }}</h3>
-        <p>Location ID: {{ port.locationId || '-' }}</p>
-        <p>Manufacturer: {{ port.manufacturer || '-'  }}</p>
-        <p>PnP ID: {{ port.pnpId || '-'  }}</p>
-        <p>Product ID: {{ port.productId || '-'  }}</p>
-        <p>Serial Number: {{ port.serialNumber || '-'  }}</p>
-        <p>Vendor Id: {{ port.vendorId || '-'  }}</p>
+  <div class="main">
+    <Navigator />
+    <div class="view">
+      <h2><span class="iconfont icon-left-circle back" v-on:click="back"></span> Select the output serial port:</h2>
+      <div class="ports">
+        <div v-for="port in ports" :key="port.comName" class="port" v-on:click="select(port)">
+          <h3>{{ port.comName || '-'  }}</h3>
+          <p>Location ID: {{ port.locationId || '-' }}</p>
+          <p>Manufacturer: {{ port.manufacturer || '-'  }}</p>
+          <p>PnP ID: {{ port.pnpId || '-'  }}</p>
+          <p>Product ID: {{ port.productId || '-'  }}</p>
+          <p>Serial Number: {{ port.serialNumber || '-'  }}</p>
+          <p>Vendor Id: {{ port.vendorId || '-'  }}</p>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-const Bluebird = require('bluebird')
-const fs = Bluebird.promisifyAll(require('fs'))
-const csv = Bluebird.promisifyAll(require('csv'))
+import SerialPort from 'serialport'
 
-const SerialPort = require('serialport')
-
-function Port (com) {
-  return new Promise((resolve, reject) => {
-    let port = new SerialPort(com, (error) => {
-      if (error) {
-        return reject(error)
-      }
-      resolve(port)
-    })
-  })
-}
+import Navigator from '../components/navigator.vue'
 
 export default {
   data () {
@@ -40,16 +30,23 @@ export default {
     }
   },
   mounted () {
-    this.search()
+    this.scan()
   },
   methods: {
-    async search () {
+    async scan () {
       let ports = await SerialPort.list()
-      this.$data.ports = ports
+      this.ports = ports
+    },
+    select (port) {
+      this.$store.dispatch('setCom', port.comName)
+      this.$router.push('/furnace')
     },
     back () {
-      this.$router.push('/import')
+      this.$router.back()
     },
+  },
+  components: {
+    Navigator,
   },
 }
 </script>
@@ -59,7 +56,7 @@ export default {
   color: #333;
   font-size: 12px;
   -webkit-app-region: no-drag;
-  padding: 12px 24px;
+  padding: 48px 84px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;

@@ -1,15 +1,20 @@
 <template>
-  <div class="view" v-bind:class="{ dragging: isDragging }"
-    v-on:dragover.prevent.stop="isDragging = true" v-on:dragleave="isDragging = false"
-    v-on:drop.prevent.stop="drop" v-on:click="select">
-    <p><img src="../assets/floppy.png" draggable="false" /></p>
-    <p>Drop the data file here.</p>
-    <input type="file" v-on:change="_select" hidden ref="file" />
+  <div class="main">
+    <Navigator :backable="backable" />
+    <div class="view" v-bind:class="{ dragging: isDragging }"
+      v-on:dragover.prevent.stop="isDragging = true" v-on:dragleave="isDragging = false"
+      v-on:drop.prevent.stop="drop" v-on:click="select">
+      <p><img src="../assets/floppy.png" draggable="false" /></p>
+      <p>Drop the data file here.</p>
+      <input type="file" v-on:change="_select" hidden ref="file" />
+    </div>
   </div>
 </template>
 
 <script>
-const Bluebird = require('bluebird')
+import Bluebird from 'bluebird'
+import Navigator from '../components/navigator.vue'
+
 const fs = Bluebird.promisifyAll(require('fs'))
 const csv = Bluebird.promisifyAll(require('csv'))
 
@@ -18,6 +23,11 @@ export default {
     return {
       isDragging: false,
     }
+  },
+  computed: {
+    backable () {
+      return 'backable' in this.$route.query
+    },
   },
   methods: {
     select () {
@@ -41,10 +51,15 @@ export default {
       let devices = await csv.parseAsync(plain, {
         columns: true,
       })
-      console.log(devices)
-      console.log(JSON.stringify(devices))
+      this.$store.dispatch('setDevices', devices)
+      if (this.backable) {
+        return this.$router.back()
+      }
       this.$router.push('/ports')
     },
+  },
+  components: {
+    Navigator,
   },
 }
 </script>
