@@ -31,20 +31,9 @@
 <script>
 import _ from 'lodash'
 import { mapState } from 'vuex'
-import SerialPort from 'serialport'
+import { Port } from '../ports'
 
 import Navigator from '../components/navigator.vue'
-
-function Port (com) {
-  return new Promise((resolve, reject) => {
-    let port = new SerialPort(com, (error) => {
-      if (error) {
-        return reject(error)
-      }
-      resolve(port)
-    })
-  })
-}
 
 export default {
   data () {
@@ -97,17 +86,9 @@ export default {
 
         let port = await Port(this.com)
 
-        port.on('data', (data) => {
-          this.log('info', `Received a message from hardware: ${data.toString()}`)
-        })
-        port.on('end', () => {
-          this.log('info', `Received a serial-port-end event.`)
-        })
-
         this.log('venbose', `Writing data to hardware:\nData: ${data}\nCom: ${this.com}`)
 
-        port.write(data)
-        port.end()
+        setTimeout(() => port.write(data), 0)
 
         this.log('success', `The data have been burned into hardware successfully!\nData: ${data}\nCom: ${this.com}`)
 
