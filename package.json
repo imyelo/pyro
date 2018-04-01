@@ -45,6 +45,13 @@
     "appId": "xyz.sodalife.pyro",
     "mac": {
       "category": "xyz.sodalife.hardware"
-    }
+    },
+    "directories": {
+      "buildResources": "build"
+    },
+    "files": [
+      "**/*",
+      "build/icon.*"
+    ]
   }
 }

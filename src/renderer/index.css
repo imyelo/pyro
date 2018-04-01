@@ -1,4 +1,6 @@
-@import './assets/Orbitron/transfonter/stylesheet.css';
+@import './assets/fonts/Orbitron/stylesheet.css';
+@import './assets/fonts/UbuntuMono/stylesheet.css';
+@import './assets/fonts/VT323/stylesheet.css';
 @import './assets/iconfont/iconfont.css';
 
 html, body {
@@ -7,11 +9,15 @@ html, body {
   width: 100%;
   margin: 0;
   padding: 0;
-  font-family: Orbitron, '微软雅黑', Roboto, -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", sans-serif;
+  font-family: 'Orbitron', '微软雅黑', Roboto, -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", sans-serif;
 }
 
-input, button, pre {
-  font-family: Orbitron, '微软雅黑', Roboto, -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", sans-serif;
+input, button {
+  font-family: 'Orbitron', '微软雅黑', Roboto, -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", sans-serif;
+}
+
+pre {
+  font-family: 'Ubuntu Mono', '微软雅黑', Roboto, -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", sans-serif;
 }
 
 body {

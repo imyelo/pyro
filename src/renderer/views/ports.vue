@@ -114,6 +114,8 @@ export default {
     position: relative;
     color: #c8c8c8;
     cursor: pointer;
+    font-family: 'VT323';
+    font-size: 14px;
 
     &:before, &:after {
       content: '';

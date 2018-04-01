@@ -80,6 +80,7 @@ export default {
     padding: 0;
     color: #413d51;
     font-size: 12px;
+    font-weight: bold;
     img {
       width: 120px;
     }

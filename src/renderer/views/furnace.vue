@@ -129,8 +129,8 @@ export default {
   .console {
     height: 200px;
     background-color: #333;
-    padding: 10px;
-    font-size: 10px;
+    padding: 12px;
+    font-size: 12px;
     box-sizing: border-box;
     overflow-x: hidden;
     overflow-y: scroll;
