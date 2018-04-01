@@ -146,6 +146,7 @@ export default {
       overflow-x: hidden;
       overflow-y: scroll;
       -webkit-app-region: no-drag;
+      -webkit-user-select: text;
       &::-webkit-scrollbar-track {
         background-color: transparent;
       }
@@ -209,7 +210,7 @@ export default {
     border: none;
     outline: none;
     background-color: #333;
-    box-shadow: 0 4px #000;
+    box-shadow: 0 4px 0 4px #444 inset;
     color: #fff;
     -webkit-app-region: no-drag;
   }

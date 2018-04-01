@@ -18,7 +18,7 @@ export default {
   align-items: center;
   width: 100%;
   height: 100%;
-  background-color: #ff8a30;
+  background-image: linear-gradient(#f6f6f6, #ccc);
   overflow: hidden;
   .main {
     display: flex;
