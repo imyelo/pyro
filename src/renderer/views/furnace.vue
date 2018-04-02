@@ -34,6 +34,7 @@
 </template>
 
 <script>
+import { remote } from 'electron'
 import _ from 'lodash'
 import { mapState } from 'vuex'
 import { Port } from '../ports'
@@ -59,6 +60,7 @@ export default {
   ]),
   mounted () {
     this.scrollToLastLog()
+    remote.getCurrentWindow().setSize(600, 600, true)
   },
   methods: {
     scrollToLastLog () {
@@ -127,7 +129,7 @@ export default {
 .view {
   color: #333;
   font-size: 12px;
-  padding: 24px 48px;
+  padding: 12px 48px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;

@@ -19,6 +19,7 @@
 </template>
 
 <script>
+import { remote } from 'electron'
 import SerialPort from 'serialport'
 import { mapState } from 'vuex'
 
@@ -35,6 +36,7 @@ export default {
   ]),
   mounted () {
     this.scan()
+    remote.getCurrentWindow().setSize(600, 600, true)
   },
   methods: {
     async scan () {

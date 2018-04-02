@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import { remote } from 'electron'
 import Bluebird from 'bluebird'
 import Navigator from '../components/navigator.vue'
 
@@ -28,6 +29,9 @@ export default {
     backable () {
       return 'backable' in this.$route.query
     },
+  },
+  mounted () {
+    remote.getCurrentWindow().setSize(400, 400, true)
   },
   methods: {
     select () {
