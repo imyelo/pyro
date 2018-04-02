@@ -3,12 +3,12 @@ import store from '../store'
 
 let cached = {}
 
-export function Port (com) {
+export function Port (com, options = {}) {
   return new Promise((resolve, reject) => {
     if (com in cached) {
       return resolve(cached[com])
     }
-    let port = new SerialPort(com, (error) => {
+    let port = new SerialPort(com, options, (error) => {
       if (error) {
         return reject(error)
       }

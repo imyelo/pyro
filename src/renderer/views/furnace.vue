@@ -40,6 +40,10 @@ import { Port } from '../ports'
 
 import Navigator from '../components/navigator.vue'
 
+const PORT_OPTIONS = {
+  baudRate: 115200,
+}
+
 export default {
   data () {
     return {
@@ -98,7 +102,7 @@ export default {
         }
         let data = `${this.device.serial}${this.device.token}${(this.device.step + 1000000 + '').slice(-6)}`
 
-        let port = await Port(this.com)
+        let port = await Port(this.com, PORT_OPTIONS)
 
         this.log('venbose', `Writing data to hardware:\nData: ${data}\nCom: ${this.com}`)
 
