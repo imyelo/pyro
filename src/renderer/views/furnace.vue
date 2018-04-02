@@ -108,7 +108,7 @@ export default {
 
         setTimeout(() => port.write(data), 0)
 
-        this.log('success', `The data have been burned into hardware successfully!\nData: ${data}\nCom: ${this.com}`)
+        this.log('success', `The data have been sent to hardware successfully!\nData: ${data}\nCom: ${this.com}`)
 
         this.serial = ''
         this.device = null
