@@ -139,7 +139,7 @@ export default {
   .console {
     height: 200px;
     background-color: #333;
-    padding: 12px;
+    padding: 12px 18px;
     font-size: 12px;
     box-sizing: border-box;
     position: relative;
@@ -197,9 +197,16 @@ export default {
       color: #fff;
       cursor: pointer;
       transition: all 200ms ease;
+      opacity: 0;
       &:hover {
         background-color: #fff;
         color: #333;
+      }
+    }
+
+    &:hover {
+      .clear {
+        opacity: 1;
       }
     }
   }
@@ -259,7 +266,7 @@ export default {
       outline: none;
       border: none;
       font-size: 10px;
-      padding: 1em 2em;
+      padding: 1em;
       background-color: transparent;
       transition: all 200ms ease;
       cursor: pointer;
