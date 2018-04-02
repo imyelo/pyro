@@ -245,8 +245,12 @@ export default {
     justify-content: space-between;
     padding-top: 24px;
     border-top: 1px solid rgba(0,0,0,0.25);
+    .options, .statuses {
+      width: 50%;
+      display: flex;
+    }
     .option, .status {
-      display: inline-block;
+      display: block;
       color: #333;
       outline: none;
       border: none;
@@ -255,6 +259,11 @@ export default {
       background-color: transparent;
       transition: all 200ms ease;
       cursor: pointer;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      width: 50%;
+      overflow: hidden;
+      flex: 1;
 
       .icon-dot {
         font-size: 10px;

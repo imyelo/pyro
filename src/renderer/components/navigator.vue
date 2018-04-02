@@ -26,7 +26,7 @@ export default {
   width: 100%;
   height: 48px;
   line-height: 48px;
-  -webkit-app-region: no-drag;
+  -webkit-app-region: drag;
   cursor: pointer;
   button {
     opacity: 0;

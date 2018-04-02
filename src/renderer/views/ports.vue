@@ -4,7 +4,7 @@
     <div class="view">
       <h2><span class="iconfont icon-left-circle back" v-on:click="back"></span> Select the output serial port:</h2>
       <div class="ports">
-        <div v-for="port in ports" :key="port.comName" class="port" v-on:click="select(port)">
+        <div v-for="port in ports" :key="port.comName" class="port" v-bind:class="{ selected: com === port.comName }" v-on:click="select(port)">
           <h3>{{ port.comName || '-'  }}</h3>
           <p>Location ID: {{ port.locationId || '-' }}</p>
           <p>Manufacturer: {{ port.manufacturer || '-'  }}</p>
@@ -20,6 +20,7 @@
 
 <script>
 import SerialPort from 'serialport'
+import { mapState } from 'vuex'
 
 import Navigator from '../components/navigator.vue'
 
@@ -29,6 +30,9 @@ export default {
       ports: [],
     }
   },
+  computed: mapState([
+    'com',
+  ]),
   mounted () {
     this.scan()
   },
@@ -153,6 +157,9 @@ export default {
       h3 {
         border-bottom: 2px solid transparent;
       }
+    }
+    &:hover {
+      box-shadow: 0 8px 0 2px #413d51;
     }
 
   }
