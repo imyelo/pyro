@@ -96,7 +96,7 @@ export default {
         if (!this.device || !this.com) {
           return
         }
-        let data = `${this.device.serial},${this.device.token},${this.device.step}`
+        let data = `${this.device.serial},${this.device.token},${(this.device.step + 1000000 + '').slice(-6)}`
 
         let port = await Port(this.com)
 
