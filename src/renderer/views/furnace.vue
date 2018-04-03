@@ -41,11 +41,20 @@ import { remote } from 'electron'
 import _ from 'lodash'
 import { mapState } from 'vuex'
 import { Port } from '../ports'
+import vm from 'vm'
 
 import Navigator from '../components/navigator.vue'
 
 const PORT_OPTIONS = {
   baudRate: 115200,
+}
+
+function AdapterScript (adapter, method) {
+  return function () {
+    let sandbox = { exports: {}, args: arguments, returns: null }
+    let script = new vm.runInNewContext(adapter + `;returns = exports.${method}.apply(this, args)`, sandbox)
+    return sandbox.returns
+  }
 }
 
 export default {
@@ -90,12 +99,12 @@ export default {
         this.log('error', 'Serial must be not empty!')
         return
       }
-      let device = _.find(this.devices, { serial: this.serial })
+      let device = AdapterScript(this.adapter.code, 'find')(this.devices, this.serial)
       if (!device) {
         this.log('error', `Device (serial: ${this.serial}) not found. Please check your serial and the data source.`)
         return
       }
-      this.log('info', `Ready to burn device.\nSerial: ${device.serial}\nToken: ${device.token}\nStep: ${device.step}.`)
+      this.log('info', `Ready to burn device.\nSerial: ${device.serial}\nToken: ${device.token}\nStep: ${device.step}`)
       this.device = device
       if (this.isAutoBurn) {
         this.burn()
@@ -109,7 +118,7 @@ export default {
         if (!this.device || !this.com) {
           return
         }
-        let data = `${this.device.serial}${this.device.token}${(this.device.step + 1000000 + '').slice(-6)}`
+        let data = AdapterScript(this.adapter.code, 'format')(this.device)
 
         let port = await Port(this.com, PORT_OPTIONS)
 
