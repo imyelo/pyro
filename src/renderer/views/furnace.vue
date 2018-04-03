@@ -145,7 +145,7 @@ export default {
 .view {
   color: #333;
   font-size: 12px;
-  padding: 12px 48px;
+  padding: 12px 48px 48px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -155,6 +155,7 @@ export default {
   }
 
   .console {
+    flex: 1;
     height: 200px;
     background-color: #333;
     padding: 12px 18px;

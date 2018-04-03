@@ -1,8 +1,8 @@
 <template>
   <div class="main">
-    <Navigator />
+    <Navigator :backable="true" />
     <div class="view">
-      <h2><span class="iconfont icon-left-circle back" v-on:click="back"></span> Select the output serial port:</h2>
+      <h2>Select the output serial port:</h2>
       <div class="ports">
         <div v-for="port in ports" :key="port.comName" class="port" v-bind:class="{ selected: com === port.comName }" v-on:click="select(port)">
           <h3>{{ port.comName || '-'  }}</h3>
@@ -62,24 +62,17 @@ export default {
   color: #333;
   font-size: 12px;
   -webkit-app-region: no-drag;
-  padding: 48px 84px;
+  padding: 24px 60px 72px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
 
   h2 {
-    font-size: 36px;
+    font-size: 24px;
     line-height: 1em;
     padding: 0 0 48px;
     margin: 0 0 0;
     position: relative;
-    .back {
-      font-size: 1em;
-      position: absolute;
-      left: -1.5em;
-      cursor: pointer;
-      -webkit-app-region: no-drag;
-    }
   }
 
   .ports {

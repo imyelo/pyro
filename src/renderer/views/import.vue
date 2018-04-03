@@ -76,6 +76,7 @@ export default {
   align-items: center;
   flex-direction: column;
   cursor: pointer;
+  padding-bottom: 48px;
   p {
     margin: 12px 0;
     padding: 0;
