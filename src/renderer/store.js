@@ -3,6 +3,7 @@ import createPersistedState from 'vuex-persistedstate'
 import Vue from 'vue'
 import km from 'keymirror'
 import ElectronStore from 'electron-store'
+import axios from 'axios'
 
 const electronStore = new ElectronStore({ name: 'pyro' })
 
@@ -12,6 +13,7 @@ const MUTATION = km({
   COM_SET: null,
   DEVICES_SET: null,
   AUTO_BURN_SET: null,
+  ADAPTER_SET: null,
 })
 
 const DEFAULT_LOG = { type: 'verbose', message: 'Hello World!' }
@@ -31,6 +33,10 @@ export default new Store({
     com: '',
     logs: [DEFAULT_LOG],
     isAutoBurn: false,
+    adapter: {
+      url: '',
+      code: '',
+    },
   },
   mutations: {
     [MUTATION.LOG_ADD] (state, log) {
@@ -48,6 +54,9 @@ export default new Store({
     [MUTATION.AUTO_BURN_SET] (state, value) {
       state.isAutoBurn = value
     },
+    [MUTATION.ADAPTER_SET] (state, { url, code }) {
+      state.adapter = { url, code }
+    },
   },
   actions: {
     log ({ commit }, data) {
@@ -64,6 +73,9 @@ export default new Store({
     },
     setAutoBurn ({ commit }, value) {
       commit(MUTATION.AUTO_BURN_SET, value)
+    },
+    setAdapter ({ commit }, adapter) {
+      commit(MUTATION.ADAPTER_SET, adapter)
     },
   }
 })

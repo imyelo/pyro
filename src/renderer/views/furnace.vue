@@ -21,10 +21,13 @@
           </div>
           <div class="statuses">
             <button class="status" v-bind:class="!!com ? 'ok' : 'error'" v-on:click="toPorts">
-              <span class="iconfont icon-dot"></span> Port: {{ com }}
+              <span class="iconfont icon-dot"></span> Port
             </button>
             <button class="status" v-bind:class="devices.length > 0 ? 'ok' : 'error'" v-on:click="toImport">
-              <span class="iconfont icon-dot"></span> Data: {{ devices.length }} items
+              <span class="iconfont icon-dot"></span> Data
+            </button>
+            <button class="status" v-bind:class="adapter.code ? 'ok' : 'error'" v-on:click="toAdapter">
+              <span class="iconfont icon-dot"></span> Adapter
             </button>
           </div>
         </div>
@@ -56,6 +59,7 @@ export default {
     'com',
     'devices',
     'logs',
+    'adapter',
     'isAutoBurn',
   ]),
   mounted () {
@@ -71,6 +75,9 @@ export default {
     },
     toPorts () {
       this.$router.push('/ports')
+    },
+    toAdapter () {
+      this.$router.push('/adapter')
     },
     toggleAutoBurn () {
       this.$store.dispatch('setAutoBurn', !this.isAutoBurn)
@@ -213,7 +220,7 @@ export default {
     }
   }
 
-  .input {
+  .input, .burn {
     display: block;
     width: 100%;
     margin: 24px 0;
@@ -222,19 +229,15 @@ export default {
     height: 3em;
     border: none;
     outline: none;
+    -webkit-app-region: no-drag;
+  }
+  .input {
     background-color: #333;
     box-shadow: 0 4px 0 4px #444 inset;
     color: #fff;
-    -webkit-app-region: no-drag;
   }
   .burn {
-    display: block;
-    width: 100%;
     margin: 24px 0 36px;
-    font-size: 24px;
-    height: 3em;
-    border: none;
-    outline: none;
     background-color: hsl(0, 100%, 40%);
     box-shadow: 0 8px #600;
     color: #fff;
@@ -281,10 +284,11 @@ export default {
       .icon-dot {
         font-size: 10px;
         padding-right: 0.5em;
+        text-shadow: 0 0 6px;
       }
 
       &:hover {
-        background-color: rgba(255,255,255,0.75);
+        background-color: rgba(221,221,221,0.75);
       }
       &.ok {
         color: hsla(100, 100%, 20%, 1);

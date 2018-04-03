@@ -19,6 +19,7 @@
   "author": "yelo",
   "license": "MIT",
   "dependencies": {
+    "axios": "^0.18.0",
     "bluebird": "^3.5.1",
     "csv": "^2.0.0",
     "electron-store": "^1.3.0",
@@ -26,8 +27,10 @@
     "fs-extra": "^5.0.0",
     "keymirror": "^0.1.1",
     "lodash": "^4.17.5",
+    "prismjs": "^1.13.0",
     "serialport": "^6.1.1",
     "source-map-support": "^0.5.4",
+    "vue-prism-component": "^1.0.1",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1",
     "vuex-persistedstate": "^2.5.1"

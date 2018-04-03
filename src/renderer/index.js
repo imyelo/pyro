@@ -1,3 +1,5 @@
+import 'prismjs'
+import 'prismjs/themes/prism-tomorrow.css'
 import Vue from 'vue'
 import Vuex from 'vuex'
 import store from './store'
