@@ -35,7 +35,7 @@ export default new Store({
     isAutoBurn: false,
     adapter: {
       url: 'https://pastebin.com/raw/M0rNhW6h',
-      code: require('raw-loader!./adapters/default.js'),
+      code: require('!raw-loader!./adapters/default.js'),
     },
   },
   mutations: {
