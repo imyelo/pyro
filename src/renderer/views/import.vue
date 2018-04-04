@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <Navigator :backable="backable" />
+    <Navigator :backable="!isSetup" />
     <div class="view" v-bind:class="{ dragging: isDragging }"
       v-on:dragover.prevent.stop="isDragging = true" v-on:dragleave="isDragging = false"
       v-on:drop.prevent.stop="drop" v-on:click="select">
@@ -26,8 +26,8 @@ export default {
     }
   },
   computed: {
-    backable () {
-      return 'backable' in this.$route.query
+    isSetup () {
+      return 'setup' in this.$route.query
     },
   },
   mounted () {
@@ -56,10 +56,10 @@ export default {
         columns: true,
       })
       this.$store.dispatch('setDevices', devices)
-      if (this.backable) {
-        return this.$router.back()
+      if (this.isSetup) {
+        return this.$router.push('/ports?setup')
       }
-      this.$router.push('/ports')
+      this.$router.back()
     },
   },
   components: {

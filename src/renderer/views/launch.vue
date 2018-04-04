@@ -14,7 +14,7 @@ export default {
     if (this.devices.length > 0) {
       return this.$router.replace('/furnace')
     }
-    this.$router.replace('/import')
+    this.$router.replace('/import?setup')
   },
 }
 </script>

@@ -31,9 +31,14 @@ export default {
       ports: [],
     }
   },
-  computed: mapState([
-    'com',
-  ]),
+  computed: {
+    ...mapState([
+      'com',
+    ]),
+    isSetup () {
+      return 'setup' in this.$route.query
+    },
+  },
   mounted () {
     this.scan()
     remote.getCurrentWindow().setSize(600, 600, true)
@@ -45,9 +50,9 @@ export default {
     },
     select (port) {
       this.$store.dispatch('setCom', port.comName)
-      this.$router.push('/furnace')
-    },
-    back () {
+      if (this.isSetup) {
+        return this.$router.push('/adapter?setup')
+      }
       this.$router.back()
     },
   },

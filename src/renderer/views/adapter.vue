@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <Navigator :backable="true" />
+    <Navigator :backable="!isSetup" />
     <div class="view">
       <div class="url">
         <input class="input" placeholder="Type the url contains the adapter source codes here." v-model.trim="url" v-on:change="isSaved = false" v-on:keyup.enter="fetch" autofocus />
@@ -31,9 +31,14 @@ export default {
       code: this.$store.state.adapter.code,
     }
   },
-  computed: mapState([
-    'adapter',
-  ]),
+  computed: {
+    ...mapState([
+      'adapter',
+    ]),
+    isSetup () {
+      return 'setup' in this.$route.query
+    },
+  },
   mounted () {
     remote.getCurrentWindow().setSize(600, 600, true)
   },
@@ -55,6 +60,9 @@ export default {
         url: this.url,
         code: this.code,
       })
+      if (this.isSetup) {
+        return this.$router.push('/furnace')
+      }
       this.$router.back()
     },
   },
