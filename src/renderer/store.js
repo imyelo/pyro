@@ -16,7 +16,7 @@ const MUTATION = km({
   ADAPTER_SET: null,
 })
 
-const DEFAULT_LOG = { type: 'verbose', message: 'Hello World!' }
+const DEFAULT_LOG = { type: 'verbose', message: 'Hello World! \n  For any help, visit https://github.com/imyelo/pyro \n  And happy coding. []~(￣▽￣)~*' }
 
 Vue.use(Vuex)
 
