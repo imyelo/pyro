@@ -11,8 +11,9 @@
         <button class="clear" v-on:click="clearLogs">Clear</button>
       </div>
       <div class="control">
-        <form v-on:submit.prevent="search">
-          <input class="input" placeholder="Type the serial of device here." v-model.trim="serial" v-on:change="device = null" autofocus />
+        <form class="identity" v-on:submit.prevent="search">
+          <input class="input" placeholder="Type the identity of device here." v-model.trim="identity" v-on:change="device = null" autofocus />
+          <div v-if="identity" class="clear" v-on:click="identity = ''"><i class="iconfont icon-cross-circle"></i></div>
         </form>
         <button class="burn" v-bind:disabled="isAutoBurn || !device || !com" v-on:click="burn">BURN</button>
         <div class="footer">
@@ -62,7 +63,7 @@ function AdapterScript (adapter, method) {
 export default {
   data () {
     return {
-      serial: '',
+      identity: '',
       device: null,
     }
   },
@@ -96,17 +97,21 @@ export default {
     clearLogs () {
       this.$store.dispatch('clearLogs')
     },
+    reset () {
+      this.identity = ''
+      this.device = null
+    },
     search () {
-      if (!this.serial) {
-        this.log('error', 'Serial must be not empty!')
+      if (!this.identity) {
+        this.log('error', 'Identity must be not empty!')
         return
       }
-      let device = AdapterScript(this.adapter.code, 'find')(this.devices, this.serial)
+      let device = AdapterScript(this.adapter.code, 'find')(this.devices, this.identity)
       if (!device) {
-        this.log('error', `Device (serial: ${this.serial}) not found. Please check your serial and the data source.`)
+        this.log('error', `Device (identity: ${this.identity}) not found. Please check your identity and the data source.`)
         return
       }
-      this.log('info', `Ready to burn device.\nSerial: ${device.serial}\nToken: ${device.token}\nStep: ${device.step}`)
+      this.log('info', `Ready to burn device.\n${JSON.stringify(device, null, 2)}`)
       this.device = device
       if (this.isAutoBurn) {
         this.burn()
@@ -130,8 +135,7 @@ export default {
 
         this.log('success', `The data have been sent to hardware successfully!\nData: ${data}\nCom: ${this.com}`)
 
-        this.serial = ''
-        this.device = null
+        this.reset()
       } catch (error) {
         this.log('error', error.message)
       }
@@ -243,10 +247,38 @@ export default {
     outline: none;
     -webkit-app-region: no-drag;
   }
-  .input {
-    background-color: #333;
-    box-shadow: 0 4px 0 4px #444 inset;
-    color: #fff;
+  .identity {
+    position: relative;
+    .input {
+      background-color: #333;
+      box-shadow: 0 4px 0 4px #444 inset;
+      color: #fff;
+      padding: 0 3em 0;
+      box-sizing: border-box;
+      font-size: 16px;
+      height: 72px;
+    }
+    .clear {
+      position: absolute;
+      top: 0;
+      right: 0;
+      margin: 0.5em;
+      padding: 0.5em;
+      color: rgba(255,255,255,0.25);
+      line-height: 1em;
+      font-size: 24px;
+      transition: all 200ms ease;
+      -webkit-app-region: no-drag;
+      cursor: pointer;
+
+      .iconfont {
+        font-size: 24px;
+      }
+
+      &:hover {
+        color: #fff;
+      }
+    }
   }
   .burn {
     margin: 24px 0 36px;

@@ -4,7 +4,7 @@
     <div class="view">
       <div class="url">
         <input class="input" placeholder="Type the url contains the adapter source codes here." v-model.trim="url" v-on:change="isSaved = false" v-on:keyup.enter="fetch" autofocus />
-        <button class="button" v-bind:disabled="isFetching || isSaved || !url || !code" v-on:click="fetch">{{ !isFetching ? 'Fetch' : 'Fetching'}}</button>
+        <button class="button" v-bind:disabled="isFetching || !url || !code" v-on:click="fetch">{{ !isFetching ? 'Fetch' : 'Fetching'}}</button>
       </div>
       <div class="code">
         <Prism class="prism" language="javascript">{{ code }}</Prism>
@@ -46,6 +46,7 @@ export default {
     async fetch () {
       try {
         this.isFetching = true
+        this.code = ''
         let { data } = await axios.get(this.url)
         this.code = data
         this.isSaved = true
@@ -143,6 +144,7 @@ export default {
     flex-direction: column;
     margin: 0 0 12px;
     border-bottom: 1px solid #e6e6e6;
+    -webkit-app-region: no-drag;
     .prism {
       flex: 1;
       margin: 0 0 12px;
