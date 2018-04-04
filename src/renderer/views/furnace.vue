@@ -307,7 +307,6 @@ export default {
       }
       &.error {
         color: hsla(0, 100%, 40%, 1);
-        border-bottom: 1px solid hsla(0, 100%, 40%, 1);
       }
       &.disabled {
         color: rgba(0,0,0,0.25);
