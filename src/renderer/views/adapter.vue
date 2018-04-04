@@ -102,7 +102,7 @@ export default {
     color: #ccc;
     margin-bottom: 12px;
     font-size: 12px;
-    font-family: 'Ubuuntu Mono';
+    font-family: 'Ubuntu Mono';
   }
   .button {
     background-color: hsl(204, 100%, 50%);
