@@ -11,7 +11,9 @@
         <button class="clear" v-on:click="clearLogs">Clear</button>
       </div>
       <div class="control">
-        <input class="input" placeholder="Type the serial of device here." v-model.trim="serial" v-on:change="device = null" v-on:keyup.enter="search" autofocus />
+        <form v-on:submit.prevent="search">
+          <input class="input" placeholder="Type the serial of device here." v-model.trim="serial" v-on:change="device = null" autofocus />
+        </form>
         <button class="burn" v-bind:disabled="isAutoBurn || !device || !com" v-on:click="burn">BURN</button>
         <div class="footer">
           <div class="options">
