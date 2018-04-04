@@ -304,7 +304,7 @@ export default {
     display: flex;
     justify-content: space-between;
     padding-top: 24px;
-    border-top: 1px solid rgba(0,0,0,0.25);
+    border-top: 1px solid #e6e6e6;
     .options, .statuses {
       width: 50%;
       display: flex;
