@@ -1,7 +1,7 @@
 <p align="center"><img src="./_medias/logo.png" width="50%"></p>
 
 # PYRO
-> Firmware data burner for Sodalife device.
+> Elegant hardware data Burning tool
 
 # Screenshot
 [![screenshot](./_medias/screenshots/all.png)](./_medias/screenshots/)

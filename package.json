@@ -1,7 +1,7 @@
 {
   "name": "pyro",
-  "version": "0.1.3",
-  "description": "Firmware data burner for Sodalife device.",
+  "version": "0.2.0",
+  "description": "Elegant hardware data Burning tool",
   "private": true,
   "main": "src",
   "scripts": {
@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@gitlab.sodalife.xyz:soda/pyro.git"
+    "url": "git@github.com:imyelo/pyro.git"
   },
   "author": "yelo",
   "license": "MIT",
