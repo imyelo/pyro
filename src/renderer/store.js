@@ -34,8 +34,8 @@ export default new Store({
     logs: [DEFAULT_LOG],
     isAutoBurn: false,
     adapter: {
-      url: '',
-      code: '',
+      url: 'https://pastebin.com/raw/M0rNhW6h',
+      code: require('raw-loader!./adapters/default.js'),
     },
   },
   mutations: {

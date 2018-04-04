@@ -43,6 +43,7 @@
     "electron-webpack-vue": "^2.1.0",
     "less": "^3.0.1",
     "less-loader": "^4.1.0",
+    "raw-loader": "^0.5.1",
     "vue": "^2.5.16",
     "webpack": "^3.11.0"
   },
