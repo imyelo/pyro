@@ -6,6 +6,39 @@
 # Screenshot
 [![screenshot](./_medias/screenshots/all.png)](./_medias/screenshots/)
 
+## Get started
+### Setup
+1. Insert your burning board into the USB slot.
+2. Drop your csv into the app. For example, check [./test/fixtures/standard.csv](./test/fixtures/standard.csv).
+3. Select the correct serial port in the app.
+4. Fetch your adapter code from the network and save it. If you don't know how to use it, try [the default options](https://pastebin.com/raw/M0rNhW6h) we offer first.
+5. Now you're ready.
+
+### Burn
+We recommend that you use the qrcode scanner and turn on the Auto-Return mode. The scanner can work perfectly for you with the Auto-Burn mode of Pyro.
+
+After you enter the identification of the device, the program will find the corresponding data for you from the data table, format and output to the specified serial port, complete the burning job.
+
+## Advanced
+### Adapter
+To enable you to use pyro to burn any format of data into the hardware, we designed the Adapter model in pyro.
+You can create an adapter of your own by implementing the following two methods:
+
+- format(data)
+- find(list, identity)
+
+For example:
+
+```javascript
+exports.format = function (data) {
+  return JSON.stringify(data)
+}
+
+exports.find = function (list, identity) {
+  return list.find((item) => item.id === identity)
+}
+```
+
 ## How to participate in contributing code
 ### Required Softwares
 - Node.js >= 8
