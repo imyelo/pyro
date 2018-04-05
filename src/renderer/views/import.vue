@@ -22,9 +22,14 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(device, index) in devices" :key="index">
+              <tr v-for="(device, index) in devices.slice(0, visibleTotal)" :key="index">
                 <td v-for="key in keys" :key="key">
                   {{ device[key] }}
+                </td>
+              </tr>
+              <tr v-if="devices.length > visibleTotal" class="more" v-on:click="more">
+                <td>
+                  {{ visibleTotal }} / {{ devices.length }} visible now. Click here to load more.
                 </td>
               </tr>
             </tbody>
@@ -47,11 +52,15 @@ import Navigator from '../components/navigator.vue'
 const fs = Bluebird.promisifyAll(require('fs'))
 const csv = Bluebird.promisifyAll(require('csv'))
 
+const DEFAULT_VISIBLE_TOTAL = 10
+const VISIBLE_STEP = DEFAULT_VISIBLE_TOTAL
+
 export default {
   data () {
     return {
       isDragging: false,
       devices: this.$store.state.devices,
+      visibleTotal: DEFAULT_VISIBLE_TOTAL,
     }
   },
   computed: {
@@ -94,6 +103,10 @@ export default {
     },
     reset () {
       this.devices = []
+      this.visibleTotal = DEFAULT_VISIBLE_TOTAL
+    },
+    more () {
+      this.visibleTotal += VISIBLE_STEP
     },
     save () {
       this.$store.dispatch('setDevices', this.devices)
@@ -101,7 +114,7 @@ export default {
         return this.$router.push('/ports?setup')
       }
       this.$router.back()
-    }
+    },
   },
   components: {
     Navigator,
@@ -241,6 +254,19 @@ export default {
           }
           &:hover {
             background-color: #f6f6f6;
+          }
+          &.more {
+            cursor: pointer;
+            background-color: #ddd;
+            td {
+              color: #666;
+              text-align: center;
+              transition: all 200ms ease;
+              &:hover {
+                color: #333;
+                text-decoration: underline;
+              }
+            }
           }
         }
 
