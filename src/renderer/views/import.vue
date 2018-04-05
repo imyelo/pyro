@@ -29,7 +29,7 @@
               </tr>
               <tr v-if="devices.length > visibleTotal" class="more" v-on:click="more">
                 <td>
-                  {{ visibleTotal }} / {{ devices.length }} visible now. Click here to load more.
+                  {{ visibleTotal }} / {{ devices.length }} visible now. Click here to check more.
                 </td>
               </tr>
             </tbody>
