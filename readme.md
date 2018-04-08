@@ -39,6 +39,26 @@ exports.find = function (list, identity) {
 }
 ```
 
+## FAQ
+## Don't have permission to open a port in Linux
+When using Pyro in Linux, you are likely to receive an error that you do not have permission to open the port.
+In this case, you can simply use ``sudo`` to elevator. However, we recommend that you get permissions by running Pyro as a ``dialout`` user group.
+For example:
+
+```bash
+# add user to the dialout gorup
+sudo adduser ${username} dialout
+
+# change current group
+newgrp dialout
+
+# launch Pyro in development mode
+npm run dev
+```
+
+For more information, see [node-serialport#1297](https://github.com/node-serialport/node-serialport/issues/1297).
+
+
 ## How to participate in contributing code
 ### Required Softwares
 - Node.js >= 8
