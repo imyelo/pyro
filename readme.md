@@ -3,8 +3,26 @@
 # PYRO
 > :fire: An indexed data burning tool designed for humans
 
-# Screenshot
+
+## Download
+- [The latest version](https://github.com/imyelo/pyro/releases/latest)
+- [Other versions](https://github.com/imyelo/pyro/releases)
+
+## Screenshot
 [![screenshot](./_medias/screenshots/all.png)](./_medias/screenshots/)
+
+## Tech Stack
+Driven by these awesome projects:
+
+- [Electron](https://electronjs.org/)
+- [serialport](https://github.com/node-serialport/node-serialport)
+- [Vue.js](https://vuejs.org/)
+- [Vuex](https://vuex.vuejs.org/)
+- [vuex-persistedstate](https://github.com/robinvdvleuten/vuex-persistedstate)
+- [electron-store](https://github.com/sindresorhus/electron-store)
+- [node-csv](https://github.com/adaltas/node-csv)
+- [axios](https://github.com/axios/axios)
+- [...and more](./package.json)
 
 ## Get started
 ### Setup
@@ -38,26 +56,6 @@ exports.find = function (list, identity) {
   return list.find((item) => item.id === identity)
 }
 ```
-
-## FAQ
-## Don't have permission to open a port in Linux
-When using Pyro in Linux, you are likely to receive an error that you do not have permission to open the port.
-In this case, you can simply use ``sudo`` to elevator. However, we recommend that you get permissions by running Pyro as a ``dialout`` user group.
-For example:
-
-```bash
-# add user to the dialout gorup
-sudo adduser ${username} dialout
-
-# change current group
-newgrp dialout
-
-# launch Pyro in development mode
-npm run dev
-```
-
-For more information, see [node-serialport#1297](https://github.com/node-serialport/node-serialport/issues/1297).
-
 
 ## How to participate in contributing code
 ### Required Softwares
@@ -96,5 +94,23 @@ Then check ``dist/pyro x.y.z.exe``.
 Good luck.
 
 ## FAQ
+## Don't have permission to open a port in Linux
+When using Pyro in Linux, you are likely to receive an error that you do not have permission to open the port.
+In this case, you can simply use ``sudo`` to elevator. However, we recommend that you get permissions by running Pyro as a ``dialout`` user group.
+For example:
+
+```bash
+# add user to the dialout gorup
+sudo adduser ${username} dialout
+
+# change current group
+newgrp dialout
+
+# launch Pyro in development mode
+npm run dev
+```
+
+For more information, see [node-serialport#1297](https://github.com/node-serialport/node-serialport/issues/1297).
+
 ### How to clear cache?
 On the win32 platform, you can clear the Pyro cache by deleting ``~/AppData/Roaming/pyro`` directory. For more information, see [sindresorhus/electron-store](https://github.com/sindresorhus/electron-store).
