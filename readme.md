@@ -1,7 +1,7 @@
 <p align="center"><img src="./_medias/logo.png" width="50%"></p>
 
 # PYRO
-> Elegant hardware data Burning tool
+> :fire: An indexed data burning tool designed for humans
 
 # Screenshot
 [![screenshot](./_medias/screenshots/all.png)](./_medias/screenshots/)
