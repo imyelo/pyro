@@ -94,14 +94,14 @@ Then check ``dist/pyro x.y.z.exe``.
 Good luck.
 
 ## FAQ
-## Don't have permission to open a port in Linux
+### Don't have permission to open a port in Linux
 When using Pyro in Linux, you are likely to receive an error that you do not have permission to open the port.
 In this case, you can simply use ``sudo`` to elevator. However, we recommend that you get permissions by running Pyro as a ``dialout`` user group.
 For example:
 
 ```bash
 # add user to the dialout gorup
-sudo adduser ${username} dialout
+sudo adduser $(whoami) dialout
 
 # change current group
 newgrp dialout
