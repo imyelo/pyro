@@ -17,7 +17,18 @@ class Ports extends EventEmitter {
   select (com, options = {}) {
     return new Promise((resolve, reject) => {
       if (com in this.opened) {
-        return resolve(this.opened[com])
+        let used = this.opened[com]
+
+        if (used.isOpen) {
+          return resolve(used)
+        }
+
+        return used.open((error) => {
+          if (error) {
+            return reject(error)
+          }
+          resolve(used)
+        })
       }
 
       let port = new SerialPort(com, options, (error) => {
@@ -39,7 +50,7 @@ class Ports extends EventEmitter {
   close () {
     let count = 0
     for (let com in this.opened) {
-      this.opened[com].end()
+      this.opened[com].close()
       delete this.opened[com]
       count += 1
     }
