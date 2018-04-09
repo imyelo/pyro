@@ -43,7 +43,7 @@
 import { remote } from 'electron'
 import _ from 'lodash'
 import { mapState } from 'vuex'
-import { Port } from '../ports'
+import ports from '../../common/ports'
 import vm from 'vm'
 
 import Navigator from '../components/navigator.vue'
@@ -127,7 +127,7 @@ export default {
         }
         let data = AdapterScript(this.adapter.code, 'format')(this.device)
 
-        let port = await Port(this.com, PORT_OPTIONS)
+        let port = await ports.select(this.com, PORT_OPTIONS)
 
         this.log('venbose', `Writing data to hardware:\nData: ${data}\nCom: ${this.com}`)
 

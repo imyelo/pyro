@@ -3,6 +3,7 @@
 import { app, BrowserWindow } from 'electron'
 import * as path from 'path'
 import { format as formatUrl } from 'url'
+import ports from '../common/ports'
 
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
@@ -63,4 +64,13 @@ app.on('activate', () => {
 // create main BrowserWindow when electron is ready
 app.on('ready', () => {
   mainWindow = createMainWindow()
+})
+
+// close all opened serial ports when electron is quiting
+app.on('before-quit', (event) => {
+  ports.close()
+})
+
+ports.on('close-all', ({ count }) => {
+  console.log(`${count} ports closed.`)
 })
