@@ -9,7 +9,7 @@
       <div class="code">
         <Prism class="prism" language="javascript">{{ code }}</Prism>
       </div>
-      <button class="button" v-bind:disabled="!isSaved || !code" v-on:click="save">Save</button>
+      <button class="button" v-bind:disabled="(!isSetup && !isSaved) || !code" v-on:click="save">Save</button>
     </div>
   </div>
 </template>
