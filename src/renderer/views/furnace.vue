@@ -48,10 +48,6 @@ import vm from 'vm'
 
 import Navigator from '../components/navigator.vue'
 
-const PORT_OPTIONS = {
-  baudRate: 115200,
-}
-
 function AdapterScript (adapter, method) {
   return function () {
     let sandbox = { exports: {}, args: arguments, returns: null }
@@ -69,6 +65,7 @@ export default {
   },
   computed: mapState([
     'com',
+    'baudRate',
     'devices',
     'logs',
     'adapter',
@@ -127,13 +124,15 @@ export default {
         }
         let data = AdapterScript(this.adapter.code, 'format')(this.device)
 
-        let port = await ports.select(this.com, PORT_OPTIONS)
+        let port = await ports.select(this.com, {
+          baudRate: this.baudRate,
+        })
 
-        this.log('venbose', `Writing data to hardware:\nData: ${data}\nCom: ${this.com}`)
+        this.log('venbose', `Writing data to hardware:\nData: ${data}\nCom: ${this.com}\nBaud rate: ${this.baudRate}`)
 
         setTimeout(() => port.write(data), 0)
 
-        this.log('success', `The data have been sent to hardware successfully!\nData: ${data}\nCom: ${this.com}`)
+        this.log('success', `The data have been sent to hardware successfully!\nData: ${data}\nCom: ${this.com}\nBaud rate: ${this.baudRate}`)
 
         this.reset()
       } catch (error) {

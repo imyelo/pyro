@@ -51,9 +51,9 @@ export default {
     select (port) {
       this.$store.dispatch('setCom', port.comName)
       if (this.isSetup) {
-        return this.$router.push('/adapter?setup')
+        return this.$router.push('/baud?setup')
       }
-      this.$router.back()
+      this.$router.replace('/baud')
     },
   },
   components: {

@@ -11,12 +11,15 @@ const MUTATION = km({
   LOG_ADD: null,
   CLEAR_LOGS: null,
   COM_SET: null,
+  BAUD_RATE_SET: null,
   DEVICES_SET: null,
   AUTO_BURN_SET: null,
   ADAPTER_SET: null,
 })
 
 const DEFAULT_LOG = { type: 'verbose', message: 'Hello World! \n  For any help, visit https://github.com/imyelo/pyro \n  And happy coding. []~(￣▽￣)~*' }
+
+const DEFAULT_BAUD_RATE = 115200
 
 Vue.use(Vuex)
 
@@ -31,6 +34,7 @@ export default new Store({
   state: {
     devices: [],
     com: '',
+    baudRate: DEFAULT_BAUD_RATE,
     logs: [DEFAULT_LOG],
     isAutoBurn: false,
     adapter: {
@@ -47,6 +51,9 @@ export default new Store({
     },
     [MUTATION.COM_SET] (state, com) {
       state.com = com
+    },
+    [MUTATION.BAUD_RATE_SET] (state, baudRate) {
+      state.baudRate = baudRate
     },
     [MUTATION.DEVICES_SET] (state, devices) {
       state.devices = devices
@@ -67,6 +74,9 @@ export default new Store({
     },
     setCom ({ commit }, com) {
       commit(MUTATION.COM_SET, com)
+    },
+    setBaudRate ({ commit }, baudRate) {
+      commit(MUTATION.BAUD_RATE_SET, baudRate)
     },
     setDevices ({ commit }, devices) {
       commit(MUTATION.DEVICES_SET, devices)
